@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-    // Start is called before the first frame update
-    void Start() {
-        
-    }
+    // Start is called before the first frame update (initialization func)
 
-    // Update is called once per frame
-    void Update() {
-        
-    }
+  public Rigidbody2D theRB;
+
+  void Start() {
+
+  }
+
+  // Update is called once per frame
+  void Update() {
+    theRB.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+  }
 }
+
