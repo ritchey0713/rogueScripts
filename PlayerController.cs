@@ -13,6 +13,12 @@ public class PlayerController : MonoBehaviour {
 
   public static PlayerController instance;
 
+  public string areaTransitionName;
+
+  private Vector3 bottomLeftLimit;
+
+  private Vector3 topRightLimit;
+
   void Start() {
     if(instance == null){
       // this refers to an instance of the controller script if it has been assigned, the script ran already and we need to remove dupes
@@ -35,6 +41,15 @@ public class PlayerController : MonoBehaviour {
       myAnim.SetFloat("lastMoveX", Input.GetAxisRaw("Horizontal"));
       myAnim.SetFloat("lastMoveY", Input.GetAxisRaw("Vertical"));
     }
+
+    // keep the player keep inside bounds
+		transform.position = new Vector3(Mathf.Clamp(transform.position.x, bottomLeftLimit.x, topRightLimit.x), Mathf.Clamp(transform.position.y, bottomLeftLimit.y, topRightLimit.y), transform.position.z);
+
+  }
+
+  public void SetBounds(Vector3 botLeft, Vector3 topRight) {
+    bottomLeftLimit = botLeft + new Vector3(.4f, .4f, 0f);
+    topRightLimit = topRight + new Vector3(-.6f, -.6f, 0f);
   }
 }
 
